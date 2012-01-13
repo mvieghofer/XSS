@@ -1,0 +1,2 @@
+serviceClass: sfs.example.xss.client.GreetingService
+path: 271C2F8CF5827152EE7E9280FF10B968.gwt.rpc
