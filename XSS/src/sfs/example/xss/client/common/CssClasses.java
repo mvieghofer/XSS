@@ -27,6 +27,10 @@ public class CssClasses {
   public static final String COMMENT_DATE = "comment-date";
   public static final String CREATE_BLOG_ENTRY_TEXTAREA = "create-blogentry-textarea";
   public static final String CREATE_BLOG_ENTRY_CONTAINER = "create-blogentry-container";
+  public static final String LABEL = "label";
+  public static final String SETTINGS = "settings-container";
+  public static final String CLOSE_ANCHOR = "close-anchor";
+  public static final String SETTINGS_OUTERPANEL = "settings-outerpanel";
   
   
 }

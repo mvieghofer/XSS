@@ -2,6 +2,7 @@ package sfs.example.xss.client;
 
 import sfs.example.xss.client.view.BlogEntry;
 import sfs.example.xss.client.view.CreateBlogEntry;
+import sfs.example.xss.client.view.Settings;
 import sfs.example.xss.shared.domain.Entry;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -16,6 +17,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class XSS implements EntryPoint, Blog {
 
   private RootPanel rootPanel;
+  private boolean xssEnabled = true;
 
   /**
    * This is the entry point method.
@@ -32,18 +34,24 @@ public class XSS implements EntryPoint, Blog {
       }
 
     });
-    
+
     Button btnSettings = new Button("Settings");
     btnSettings.addClickHandler(new ClickHandler() {
 
       @Override
       public void onClick(ClickEvent event) {
-        // TODO Auto-generated method stub
-
+        insertSettingsPanel();
       }
     });
     RootPanel.get("buttonContainer").add(btnCreate);
     RootPanel.get("buttonContainer").add(btnSettings);
+  }
+
+  /**
+   * 
+   */
+  protected void insertSettingsPanel() {
+    rootPanel.add(new Settings(this));
   }
 
   /**
@@ -56,6 +64,21 @@ public class XSS implements EntryPoint, Blog {
   @Override
   public void addEntry(Entry entry) {
     rootPanel.remove(0);
-    rootPanel.add(new BlogEntry(entry));
+    rootPanel.add(new BlogEntry(entry, this));
+  }
+
+  @Override
+  public boolean getXSSEnabled() {
+    return xssEnabled;
+  }
+
+  @Override
+  public void setXSSEnabled(boolean xssEnabled) {
+    this.xssEnabled = xssEnabled;
+  }
+
+  @Override
+  public void removeSettingsPanel(Settings settings) {
+    rootPanel.remove(settings);
   }
 }

@@ -112,7 +112,7 @@ body {
 }
 
 #buttonContainer button {
-  margin-left: 5px;	
+	margin-left: 5px;
 }
 
 .create-blogentry-textarea {
@@ -122,4 +122,26 @@ body {
 
 .create-blogentry-container {
 	padding-bottom: 25px;
+}
+
+.settings-container {
+  background: #fff;
+  padding: 10px;
+}
+
+.settings-outerpanel {
+	position: absolute;
+  left: 30%;
+  top: 150px;
+  width: 40%;
+  padding: 25px;
+  background: rgba(100, 100, 100, 0.8);
+  border-radius: 15px
+}
+
+.close-anchor {
+	color: black;
+	text-decoration: underline;
+	position: absolute;
+	right: 35px;
 }

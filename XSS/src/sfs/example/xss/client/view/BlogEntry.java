@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import sfs.example.xss.client.Blog;
 import sfs.example.xss.client.common.CssClasses;
 import sfs.example.xss.shared.domain.Entry;
 
@@ -29,13 +30,18 @@ public class BlogEntry extends FlowPanel {
   
   private FlowPanel commentContainer = new FlowPanel();
   
-  public BlogEntry() {
+  private Blog blog;
+  
+  public BlogEntry(Blog blog) {
     // create empty blog entry
     setStyleName(CssClasses.BLOG_ENTRY);
+    this.blog = blog;
   }
   
-  public BlogEntry(Entry entry) {
+  public BlogEntry(Entry entry, Blog blog) {
     setStyleName(CssClasses.BLOG_ENTRY);
+    
+    this.blog = blog;
     
     HTML msg = new HTML();
     msg.setHTML(entry.getText());
@@ -82,7 +88,7 @@ public class BlogEntry extends FlowPanel {
       insert(new Separator(), getWidgetIndex(commentContainer));
     }
     commentList.add(entry);
-    commentContainer.add(new CommentEntry(entry, commentList.size()));
+    commentContainer.add(new CommentEntry(entry, commentList.size(), blog));
   }
 
 }

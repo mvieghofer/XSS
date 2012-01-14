@@ -2,10 +2,12 @@
  */
 package sfs.example.xss.client.view;
 
+import sfs.example.xss.client.Blog;
 import sfs.example.xss.client.common.CssClasses;
 import sfs.example.xss.shared.domain.Entry;
 
 import com.google.gwt.i18n.shared.DateTimeFormat;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -23,7 +25,7 @@ public class CommentEntry extends FlowPanel {
 
   }
 
-  public CommentEntry(Entry entry, int id) {
+  public CommentEntry(Entry entry, int id, Blog blog) {
     setStyleName(CssClasses.COMMENT_CONTAINER);
 
     Label lblId = new Label(id + "");
@@ -44,7 +46,12 @@ public class CommentEntry extends FlowPanel {
     header.add(lblId);
 
     HTML lblText = new HTML();
-    lblText.setHTML(entry.getText());
+    if (blog.getXSSEnabled()) {
+      lblText.setHTML(entry.getText());
+    } else {
+      lblText.setHTML(new SafeHtmlBuilder().appendEscaped(entry.getText())
+          .toSafeHtml());
+    }
 
     add(header);
     add(lblText);
