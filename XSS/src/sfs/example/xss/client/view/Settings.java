@@ -21,10 +21,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
 public class Settings extends FlowPanel {
   public Settings(final Blog blog) {
     
-    setStyleName(CssClasses.SETTINGS_OUTERPANEL);
+    setStyleName(CssClasses.POPUP);
     
     FlowPanel innerContainer = new FlowPanel();
-    innerContainer.setStyleName(CssClasses.SETTINGS);
     
     final CheckBox cb = new CheckBox("XSS enabled");
     cb.setValue(blog.getXSSEnabled());
