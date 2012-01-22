@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.sun.java.swing.plaf.nimbus.SeparatorPainter;
 
 /**
  * filename: BlogEntry.java
@@ -31,6 +32,8 @@ public class BlogEntry extends FlowPanel {
   private FlowPanel commentContainer = new FlowPanel();
   
   private Blog blog;
+
+  private boolean separatorAdded = false;
   
   public BlogEntry(Blog blog) {
     // create empty blog entry
@@ -66,7 +69,7 @@ public class BlogEntry extends FlowPanel {
   }
   
   @Override
-  public Iterator<Widget> iterator() {
+  public Iterator<Widget> iterator() { 
     return getChildren().iterator();
   }
 
@@ -84,11 +87,24 @@ public class BlogEntry extends FlowPanel {
   }
   
   public void addComment(Entry entry) {
-    if (commentList.size() == 0) {
+    if (commentList.size() == 0 && !separatorAdded) {
       insert(new Separator(), getWidgetIndex(commentContainer));
+      separatorAdded = true;
     }
     commentList.add(entry);
     commentContainer.add(new CommentEntry(entry, commentList.size(), blog));
+  }
+  
+  public void update() {
+    commentContainer.clear();
+    List<Entry> tmp = new ArrayList<Entry>();
+    for (Entry e : commentList) {
+      tmp.add(e);
+    }
+    commentList.clear();
+    for(Entry e : tmp) {
+      addComment(e);
+    }
   }
 
 }

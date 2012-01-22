@@ -38,10 +38,11 @@ public class Author implements Serializable {
     for (int i = 0; i < upperBound; i++) {
       sb.append(numbers[Random.nextInt(numbers.length)]);
     }
-    return sb.toString();
+    setName(sb.toString());
+    return getName();
   }
 
-  public Author(String name, String email) {
+  public Author(String name, String email) { 
     setName(name);
     setEmail(email);
   }
